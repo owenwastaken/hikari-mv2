@@ -583,6 +583,22 @@ class EntityFactoryImpl(entity_factory.EntityFactory):
             component_models.ComponentType.FILE: self._deserialize_file_component,
             component_models.ComponentType.CONTAINER: self._deserialize_container_component,
         }
+        self._interaction_components_mapping: dict[
+            component_models.ComponentType,
+            typing.Callable[[data_binding.JSONObject], interaction_components.InteractionComponentTypesT],
+        ] = {component_models.ComponentType.LABEL: self._deserialize_interaction_label_component}
+        self._interaction_label_component_mapping: dict[
+            component_models.ComponentType,
+            typing.Callable[[data_binding.JSONObject], interaction_components.InteractionLabelTypesT],
+        ] = {
+            component_models.ComponentType.TEXT_INPUT: self._deserialize_interaction_text_input_component,
+            component_models.ComponentType.TEXT_SELECT_MENU: self._deserialize_interaction_text_select_menu_component,
+            component_models.ComponentType.USER_SELECT_MENU: self._deserialize_interaction_user_select_menu_component,
+            component_models.ComponentType.ROLE_SELECT_MENU: self._deserialize_interaction_role_select_menu_component,
+            component_models.ComponentType.MENTIONABLE_SELECT_MENU: self._deserialize_interaction_mentionable_select_menu_component,  # noqa: E501
+            component_models.ComponentType.CHANNEL_SELECT_MENU: self._deserialize_interaction_channel_select_menu_component,  # noqa: E501
+            component_models.ComponentType.FILE_UPLOAD: self._deserialize_interaction_file_upload_component,
+        }
         self._container_component_mapping: dict[
             component_models.ComponentType, typing.Callable[[data_binding.JSONObject], component_models.ContainerTypesT]
         ] = {
