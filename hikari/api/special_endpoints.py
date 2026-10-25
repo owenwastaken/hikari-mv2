@@ -79,8 +79,7 @@ from hikari.internal import typing_extensions
 
 if typing.TYPE_CHECKING:
     import types
-
-    from typing_extensions import Self
+    from typing import Self
 
     from hikari import applications
     from hikari import auto_mod
@@ -3314,21 +3313,21 @@ class PollAnswerBuilder(abc.ABC):
 
 
 if typing.TYPE_CHECKING:
-    MessageActionRowBuilderComponentsT = typing.Union[ButtonBuilder, SelectMenuBuilder]
+    MessageActionRowBuilderComponentsT = ButtonBuilder | SelectMenuBuilder
 
     ModalActionRowBuilderComponentsT = TextInputBuilder
 
-    ContainerBuilderComponentsT = typing.Union[
-        MessageActionRowBuilder,
-        TextDisplayComponentBuilder,
-        SectionComponentBuilder,
-        MediaGalleryComponentBuilder,
-        SeparatorComponentBuilder,
-        FileComponentBuilder,
-    ]
+    ContainerBuilderComponentsT = (
+        MessageActionRowBuilder
+        | TextDisplayComponentBuilder
+        | SectionComponentBuilder
+        | MediaGalleryComponentBuilder
+        | SeparatorComponentBuilder
+        | FileComponentBuilder
+    )
 
-    SectionBuilderAccessoriesT = typing.Union[ButtonBuilder, ThumbnailComponentBuilder]
-    SectionBuilderComponentsT = typing.Union[TextDisplayComponentBuilder]
+    SectionBuilderAccessoriesT = ButtonBuilder | ThumbnailComponentBuilder
+    SectionBuilderComponentsT = TextDisplayComponentBuilder
 
     LabelBuilderComponentsT = typing.Union[SelectMenuBuilder, TextInputBuilder, FileUploadComponentBuilder]
 
